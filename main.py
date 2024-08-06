@@ -1,5 +1,6 @@
 import subprocess
 import sys
+import os
 
 print("""
  _______       ___   .___________.    ___         .______        ___           _______. _______ 
@@ -33,21 +34,26 @@ print("""
 
 
 
+# Define the directory containing the script files relative to the current script's location
+script_dir = os.path.join(os.path.dirname(__file__))
 
 def run_config():
     """Run the config script."""
     print("Running config script...")
-    subprocess.run([sys.executable, 'config.py'])
+    config_path = os.path.join(script_dir, 'config.py')
+    subprocess.run([sys.executable, config_path])
 
 def run_user():
     """Run the user script."""
     print("Running user script...")
-    subprocess.run([sys.executable, 'user.py'])
+    user_path = os.path.join(script_dir, 'user.py')
+    subprocess.run([sys.executable, user_path])
 
 def run_server():
     """Run the server script."""
     print("Running server script...")
-    subprocess.run([sys.executable, 'server.py'])
+    server_path = os.path.join(script_dir, 'server.py')
+    subprocess.run([sys.executable, server_path])
 
 def display_menu():
     """Display the main menu."""
