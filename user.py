@@ -40,7 +40,7 @@ def display_data(filter_key=None, filter_group=None):
     if data_store:
         # Create a PrettyTable for displaying data
         table = PrettyTable()
-        table.field_names = ["ID", "Key", "Value", "Date", "Group"]
+        table.field_names = ["ID", "Key", "Value", "Date", "Group", "VS checked"]
         
         # Set table column widths
         table.max_width["ID"] = 5
@@ -48,6 +48,7 @@ def display_data(filter_key=None, filter_group=None):
         table.max_width["Value"] = 60
         table.max_width["Date"] = 20
         table.max_width["Group"] = 20
+        table.max_width["VS checked"] = 30 
         
         # Iterate through each entry in the data store
         id_counter = 1
@@ -63,8 +64,10 @@ def display_data(filter_key=None, filter_group=None):
                     group = "N/A"
                     formatted_value = format_value(value)
                 
-                table.add_row([id_counter, key, formatted_value, date, group])
-                table.add_row(["-" * 5, "-" * 30, "-" * 60, "-" * 20, "-" * 20])  # Adding a separator line
+                vs_checked = "N/A"  # Placeholder value for the "VS checked" column
+                
+                table.add_row([id_counter, key, formatted_value, date, group, vs_checked])
+                table.add_row(["-" * 5, "-" * 30, "-" * 60, "-" * 20, "-" * 20, "-" * 30])  # Adding a separator line
                 id_counter += 1
 
         print(table)

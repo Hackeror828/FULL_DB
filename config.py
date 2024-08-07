@@ -207,7 +207,8 @@ def assign_keys_to_group(config):
             if isinstance(config[key], dict):
                 config[key]['group'] = group
             else:
-                config[key] = {'group': group}  # Create a new dict with the group if the key doesn't exist as a dict
+                # Retain the existing value and add the group
+                config[key] = {'value': config[key], 'group': group}
             updated = True
 
     if updated:
@@ -215,7 +216,6 @@ def assign_keys_to_group(config):
         print(f"All keys containing '{keyword}' have been assigned to group '{group}'.")
     else:
         print(f"No keys containing '{keyword}' were found.")
-
 
 
 def save_to_csv(data, file_path):
