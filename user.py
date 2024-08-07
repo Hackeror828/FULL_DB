@@ -71,6 +71,21 @@ def display_data(filter_key=None, filter_group=None):
     else:
         print(f"No data available in '{db_file}'.")
 
+def show_groups():
+    """Display all unique groups in the data store."""
+    data_store = load_data_store()
+    groups = set()
+
+    for value in data_store.values():
+        if isinstance(value, dict) and "group" in value:
+            groups.add(value["group"])
+
+    if groups:
+        print("Groups:")
+        for group in groups:
+            print(group)
+    else:
+        print("No groups available.")
 
 def main_loop():
     """Main command loop for displaying and filtering data."""
@@ -89,8 +104,11 @@ def main_loop():
             key_filter = input("Enter the key to filter by: ").strip()
             display_data(filter_key=key_filter)
         elif choice == '3':
-            group_filter = input("Enter the group to filter by: ").strip()
-            display_data(filter_group=group_filter)
+            group_filter = input("Enter the group to filter by (or type 'show groups' to list all groups): ").strip()
+            if group_filter.lower() == 'show groups':
+                show_groups()
+            else:
+                display_data(filter_group=group_filter)
         elif choice == '4' or choice.lower() == 'exit':
             print("Exiting...")
             break
